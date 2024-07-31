@@ -7,23 +7,14 @@ function age(person) {
     return person.yearOfDeath - person.yearOfBirth;
 }
 
-function compareAge(person1, person2) {
-    const age1 = age(person1);
-    const age2 = age(person2);
-    if(age1 > age2) {
-        return 1;
-    }
-    else if(age1 == age2) {
-        return 0;
-    }
-    else {
-        return -1;
-    }
-}
-
 const findTheOldest = function(people) {
     return people.
-        sort((person1, person2) => compareAge(person1, person2))[people.length-1]; 
+        reduce((oldest, current) => {
+            const oldestAge = age(oldest);
+            const currentAge = age(current);
+
+            return oldestAge > currentAge? oldest : current;
+        });
 };
 
 // Do not edit below this line
